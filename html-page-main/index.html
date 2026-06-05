@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fleet Management Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background-color: rgba(148, 163, 184, 0.7); border-radius: 9999px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+    .curve-chart { clip-path: polygon(0 100%, 10% 85%, 20% 92%, 30% 72%, 40% 78%, 50% 62%, 60% 68%, 70% 45%, 80% 55%, 90% 35%, 100% 40%, 100% 100%); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <header class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="text-sm text-slate-400">Fleet Management</p>
+        <h1 class="text-3xl font-semibold text-white">Vehicle Damages & Expenses Dashboard</h1>
+        <p class="mt-2 max-w-2xl text-slate-400">Track every vehicle, expense claim, service event and supporting documentation in one secure dashboard.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-lg shadow-slate-950/40">
+          <p class="text-sm text-slate-500">Total Fleet Spend</p>
+          <p class="mt-3 text-2xl font-semibold text-cyan-300">$148,620</p>
+        </div>
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-lg shadow-slate-950/40">
+          <p class="text-sm text-slate-500">Pending Approvals</p>
+          <p class="mt-3 text-2xl font-semibold text-amber-300">8 Requests</p>
+        </div>
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-lg shadow-slate-950/40">
+          <p class="text-sm text-slate-500">Active Vehicles</p>
+          <p class="mt-3 text-2xl font-semibold text-emerald-300">21</p>
+        </div>
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-lg shadow-slate-950/40">
+          <p class="text-sm text-slate-500">Monthly Expenses</p>
+          <p class="mt-3 text-2xl font-semibold text-fuchsia-300">$18,740</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
+      <div class="space-y-6">
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/30">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-500">Expense Tracking</p>
+              <h2 class="mt-3 text-2xl font-semibold text-white">Expense Snapshot</h2>
+            </div>
+            <div class="space-y-2 text-right text-slate-400 sm:text-left">
+              <p>Total spend per vehicle, approvals and recent claims.</p>
+              <p class="text-sm text-slate-500">Secure storage ready for SARS audit.</p>
+            </div>
+          </div>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-3xl bg-slate-950/80 p-5">
+              <p class="text-sm text-slate-400">Fleet spend distribution</p>
+              <div class="mt-4 h-48 overflow-hidden rounded-3xl bg-gradient-to-b from-cyan-600/20 via-slate-800 to-slate-900 p-4">
+                <div class="relative h-full w-full bg-slate-800/40 rounded-3xl overflow-hidden">
+                  <div class="absolute inset-x-0 top-0 h-2 bg-cyan-400"></div>
+                  <div class="curve-chart absolute bottom-0 left-0 right-0 bg-indigo-400/70"></div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-300">
+                  <div><span class="block text-slate-100">Repairs</span>$62,300</div>
+                  <div><span class="block text-slate-100">Tyres</span>$18,900</div>
+                  <div><span class="block text-slate-100">Services</span>$39,840</div>
+                  <div><span class="block text-slate-100">Damage</span>$27,580</div>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-3xl bg-slate-950/80 p-5">
+              <p class="text-sm text-slate-400">Monthly spend trend</p>
+              <div class="mt-4 grid h-48 grid-cols-6 gap-2 items-end">
+                <div class="h-24 rounded-full bg-cyan-400"></div>
+                <div class="h-28 rounded-full bg-emerald-400"></div>
+                <div class="h-20 rounded-full bg-fuchsia-400"></div>
+                <div class="h-32 rounded-full bg-sky-400"></div>
+                <div class="h-16 rounded-full bg-amber-400"></div>
+                <div class="h-36 rounded-full bg-violet-400"></div>
+              </div>
+              <div class="mt-4 flex justify-between text-xs text-slate-500">
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/30">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-500">Recent Claims</p>
+              <h2 class="mt-2 text-2xl font-semibold text-white">Latest submissions</h2>
+            </div>
+            <button id="newClaimBtn" class="rounded-full bg-cyan-500 px-5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">New Claim / Expense</button>
+          </div>
+          <div class="mt-6 space-y-4">
+            <div class="grid gap-4 md:grid-cols-3">
+              <div class="rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                <p class="text-sm text-slate-400">Registration</p>
+                <p class="mt-2 font-semibold text-white">ABC1234</p>
+              </div>
+              <div class="rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                <p class="text-sm text-slate-400">Claim type</p>
+                <p class="mt-2 font-semibold text-white">Tyre Replacement</p>
+              </div>
+              <div class="rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                <p class="text-sm text-slate-400">Status</p>
+                <p class="mt-2 font-semibold text-amber-300">Pending approval</p>
+              </div>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div class="rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                <p class="text-sm text-slate-400">Amount</p>
+                <p class="mt-2 text-xl font-semibold text-white">$890.00</p>
+              </div>
+              <div class="rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                <p class="text-sm text-slate-400">Submitted by</p>
+                <p class="mt-2 font-semibold text-white">L. Mbatha</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/30">
+          <h2 class="text-2xl font-semibold text-white">Expense Search & Filters</h2>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <input id="filterReg" type="text" placeholder="Search reg." class="rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20" />
+            <select id="filterType" class="rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20">
+              <option value="">All expense types</option>
+              <option>Tyres</option>
+              <option>Service</option>
+              <option>Damage</option>
+              <option>Repair</option>
+              <option>Accident</option>
+              <option>Other</option>
+            </select>
+            <input id="filterDate" type="month" class="rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20" />
+            <select id="filterStatus" class="rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20">
+              <option value="">All statuses</option>
+              <option>Pending approval</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+              <option>Completed</option>
+            </select>
+          </div>
+          <div class="mt-6 overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/80">
+            <table class="min-w-full divide-y divide-slate-800 text-sm text-slate-200">
+              <thead class="bg-slate-900/95 text-left text-xs uppercase tracking-[0.2em] text-slate-500">
+                <tr>
+                  <th class="px-4 py-4">Registration</th>
+                  <th class="px-4 py-4">Expense type</th>
+                  <th class="px-4 py-4">Date</th>
+                  <th class="px-4 py-4">Amount</th>
+                  <th class="px-4 py-4">Status</th>
+                  <th class="px-4 py-4">Submitted by</th>
+                </tr>
+              </thead>
+              <tbody id="claimsTable" class="divide-y divide-slate-800 bg-slate-950/90"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <aside class="space-y-6">
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/30">
+          <h2 class="text-2xl font-semibold text-white">Top Vehicles</h2>
+          <div class="mt-5 space-y-4">
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="text-sm text-slate-400">Reg.</p>
+                  <p class="text-lg font-semibold text-white">FTR7654</p>
+                </div>
+                <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-sm text-emerald-300">Active</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-400">Model: Isuzu NQR 500</p>
+              <p class="mt-1 text-sm text-slate-400">Last spend: $2,120</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="text-sm text-slate-400">Reg.</p>
+                  <p class="text-lg font-semibold text-white">BDX1120</p>
+                </div>
+                <span class="rounded-full bg-amber-500/10 px-3 py-1 text-sm text-amber-300">Pending</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-400">Model: Toyota Hilux</p>
+              <p class="mt-1 text-sm text-slate-400">Last spend: $750</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="text-sm text-slate-400">Reg.</p>
+                  <p class="text-lg font-semibold text-white">TRN4392</p>
+                </div>
+                <span class="rounded-full bg-sky-500/10 px-3 py-1 text-sm text-sky-300">Review</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-400">Model: Volvo FH</p>
+              <p class="mt-1 text-sm text-slate-400">Last spend: $3,430</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/30">
+          <h2 class="text-2xl font-semibold text-white">Audit-ready storage</h2>
+          <p class="mt-4 text-slate-400">All uploaded invoices, quotations, accident records, and photos are tracked per vehicle for SARS/tax audit purposes. Stored documents are marked with clear approval state and submission date.</p>
+          <div class="mt-6 space-y-3 text-sm text-slate-300">
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <p class="font-semibold text-white">Document Vault</p>
+              <p class="mt-2">Invoice PDFs, service records, and supporting photos are preserved with expense metadata.</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <p class="font-semibold text-white">Approval audit log</p>
+              <p class="mt-2">Approval status and reviewer notes visible for every claim.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-8 rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/20">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-sm uppercase tracking-[0.18em] text-slate-500">Vehicle Register</p>
+          <h2 class="mt-2 text-2xl font-semibold text-white">Vehicle list</h2>
+        </div>
+        <p class="text-sm text-slate-400">Tap a vehicle row to view its full expense profile.</p>
+      </div>
+      <div class="mt-6 overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/80">
+        <table class="min-w-full divide-y divide-slate-800 text-sm text-slate-200">
+          <thead class="bg-slate-900/95 text-left text-xs uppercase tracking-[0.2em] text-slate-500">
+            <tr>
+              <th class="px-4 py-4">Registration</th>
+              <th class="px-4 py-4">Make</th>
+              <th class="px-4 py-4">Model</th>
+              <th class="px-4 py-4">Status</th>
+              <th class="px-4 py-4">Total expenses</th>
+              <th class="px-4 py-4">Membership</th>
+            </tr>
+          </thead>
+          <tbody id="vehicleTable" class="divide-y divide-slate-800 bg-slate-950/90"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
+    <div class="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-900/95 shadow-2xl shadow-slate-950/50">
+      <div class="flex flex-col gap-4 border-b border-slate-800 px-6 py-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-sm text-slate-400">Vehicle profile</p>
+          <h3 id="modalTitle" class="mt-1 text-2xl font-semibold text-white">ABC1234 - Isuzu NQR 500</h3>
+        </div>
+        <button id="closeModal" class="rounded-full bg-slate-800 px-4 py-2 text-sm text-slate-200 transition hover:bg-slate-700">Close</button>
+      </div>
+      <div class="grid gap-6 p-6 lg:grid-cols-[1fr_0.95fr]">
+        <aside class="space-y-6 rounded-3xl border border-slate-800 bg-slate-950/80 p-5">
+          <div>
+            <p class="text-sm text-slate-400">Registration</p>
+            <p id="profileReg" class="mt-2 text-lg font-semibold text-white"></p>
+          </div>
+          <div>
+            <p class="text-sm text-slate-400">Total expenses</p>
+            <p id="profileTotal" class="mt-2 text-2xl font-semibold text-cyan-300"></p>
+          </div>
+          <div>
+            <p class="text-sm text-slate-400">Status</p>
+            <p id="profileStatus" class="mt-2 text-lg font-semibold text-white"></p>
+          </div>
+          <div>
+            <p class="text-sm text-slate-400">Driver</p>
+            <p id="profileDriver" class="mt-2 text-lg font-semibold text-white"></p>
+          </div>
+          <div class="grid gap-3">
+            <p class="text-sm text-slate-400">Secure storage</p>
+            <p class="rounded-3xl bg-slate-800/80 px-4 py-3 text-sm text-slate-200">Invoice and photo records are audit-ready with registration metadata.</p>
+          </div>
+        </aside>
+
+        <main class="space-y-6">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <p class="text-sm text-slate-400">Damage history</p>
+              <ul id="damageHistory" class="mt-3 space-y-3 text-slate-200"></ul>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+              <p class="text-sm text-slate-400">Service history</p>
+              <ul id="serviceHistory" class="mt-3 space-y-3 text-slate-200"></ul>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+            <p class="text-sm text-slate-400">Documents & invoices</p>
+            <div id="documentList" class="mt-4 space-y-3"></div>
+          </div>
+
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/80 p-4">
+            <p class="text-sm text-slate-400">Tyre replacements</p>
+            <ul id="tyreHistory" class="mt-4 space-y-3"></ul>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div id="claimModal" class="fixed inset-0 z-40 hidden items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-3xl rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-2xl shadow-slate-950/60">
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="text-sm uppercase tracking-[0.18em] text-slate-500">New claim</p>
+          <h3 class="mt-1 text-2xl font-semibold text-white">Submit a new expense request</h3>
+        </div>
+        <button id="closeClaim" class="rounded-full bg-slate-800 px-4 py-2 text-sm text-slate-200 transition hover:bg-slate-700">Close</button>
+      </div>
+      <form id="claimForm" class="mt-6 grid gap-5">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2 text-sm text-slate-300">
+            Vehicle selection
+            <select id="claimVehicle" required class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20"></select>
+          </label>
+          <label class="space-y-2 text-sm text-slate-300">
+            Expense type
+            <select id="claimType" required class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20">
+              <option value="Tyres">Tyres</option>
+              <option value="Service">Service</option>
+              <option value="Damage">Damage</option>
+              <option value="Repair">Repair</option>
+              <option value="Accident">Accident</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="space-y-2 text-sm text-slate-300">
+          Description
+          <textarea id="claimDescription" required rows="3" class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20"></textarea>
+        </label>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2 text-sm text-slate-300">
+            Amount
+            <input id="claimAmount" type="number" min="0" step="0.01" required class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20" />
+          </label>
+          <label class="space-y-2 text-sm text-slate-300">
+            Date
+            <input id="claimDate" type="date" required class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20" />
+          </label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2 text-sm text-slate-300">
+            Submitted by
+            <input id="claimSubmittedBy" type="text" required class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20" />
+          </label>
+          <label class="space-y-2 text-sm text-slate-300">
+            Approval status
+            <select id="claimStatus" class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20">
+              <option>Pending approval</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+              <option>Completed</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2 text-sm text-slate-300">
+            Upload invoice PDF/image
+            <input id="claimInvoice" type="file" accept="application/pdf,image/*" class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-950" />
+          </label>
+          <label class="space-y-2 text-sm text-slate-300">
+            Upload supporting photos
+            <input id="claimPhotos" type="file" accept="image/*" multiple class="w-full rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 text-sm text-slate-100 file:mr-4 file:rounded-full file:border-0 file:bg-emerald-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-950" />
+          </label>
+        </div>
+
+        <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-between">
+          <p class="text-sm text-slate-400">New claims are routed through admin review before final quotation and invoice upload.</p>
+          <button type="submit" class="rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">Submit claim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const vehicles = [
+      { reg: 'ABC1234', make: 'Isuzu', model: 'NQR 500', status: 'Active', total: 14200, driver: 'L. Mbatha', damage: ['Front bumper scratch - Sep 2024', 'Rear window chip - Jan 2025'], service: ['Oil service - Nov 2024', 'Brake check - Mar 2025'], docs: ['Invoice 2305.pdf', 'Quotation 2104.pdf'], tyres: ['2 tyres replaced - Apr 2025'], membership: 'Silver' },
+      { reg: 'BDX1120', make: 'Toyota', model: 'Hilux', status: 'Pending', total: 8400, driver: 'T. Adams', damage: ['Side mirror replaced - Mar 2025'], service: ['Clutch service - Feb 2025'], docs: ['Service record Feb 2025.pdf'], tyres: ['4 tyres replaced - Jan 2025'], membership: 'Gold' },
+      { reg: 'TRN4392', make: 'Volvo', model: 'FH', status: 'Review', total: 27900, driver: 'S. Patel', damage: ['Collision repair - May 2025'], service: ['Full fleet inspection - Apr 2025'], docs: ['Accident claim 5105.pdf', 'Repair invoice 0505.pdf'], tyres: ['6 tyres replaced - May 2025'], membership: 'Platinum' },
+      { reg: 'FTR7654', make: 'Mercedes-Benz', model: 'Actros', status: 'Active', total: 31000, driver: 'N. Dlamini', damage: ['Stone chip - Feb 2025'], service: ['Transmission check - Jan 2025'], docs: ['Tyre invoice 1204.pdf'], tyres: ['8 tyres replaced - Feb 2025'], membership: 'Gold' },
+      { reg: 'ZPY8339', make: 'Ford', model: 'Ranger', status: 'Active', total: 6650, driver: 'M. Nkosi', damage: ['Minor dent - Apr 2025'], service: ['Filter service - Mar 2025'], docs: ['Repair quotation 2205.pdf'], tyres: ['2 tyres replaced - Mar 2025'], membership: 'Silver' }
+    ];
+
+    const claims = [
+      { reg: 'ABC1234', type: 'Tyres', date: '2025-05-14', status: 'Pending approval', amount: 890, submittedBy: 'L. Mbatha' },
+      { reg: 'BDX1120', type: 'Service', date: '2025-05-08', status: 'Approved', amount: 540, submittedBy: 'T. Adams' },
+      { reg: 'TRN4392', type: 'Accident', date: '2025-05-03', status: 'Review', amount: 10250, submittedBy: 'S. Patel' },
+      { reg: 'FTR7654', type: 'Repair', date: '2025-04-27', status: 'Completed', amount: 3210, submittedBy: 'N. Dlamini' },
+      { reg: 'ZPY8339', type: 'Damage', date: '2025-04-20', status: 'Rejected', amount: 420, submittedBy: 'M. Nkosi' }
+    ];
+
+    const tableElement = document.getElementById('vehicleTable');
+    const filterReg = document.getElementById('filterReg');
+    const filterType = document.getElementById('filterType');
+    const filterDate = document.getElementById('filterDate');
+    const filterStatus = document.getElementById('filterStatus');
+    const modal = document.getElementById('modal');
+    const claimModal = document.getElementById('claimModal');
+    const newClaimBtn = document.getElementById('newClaimBtn');
+    const closeModal = document.getElementById('closeModal');
+    const closeClaim = document.getElementById('closeClaim');
+    const claimForm = document.getElementById('claimForm');
+    const claimVehicle = document.getElementById('claimVehicle');
+    const modalTitle = document.getElementById('modalTitle');
+    const profileReg = document.getElementById('profileReg');
+    const profileTotal = document.getElementById('profileTotal');
+    const profileStatus = document.getElementById('profileStatus');
+    const profileDriver = document.getElementById('profileDriver');
+    const damageHistory = document.getElementById('damageHistory');
+    const serviceHistory = document.getElementById('serviceHistory');
+    const documentList = document.getElementById('documentList');
+    const tyreHistory = document.getElementById('tyreHistory');
+
+    function formatCurrency(value) {
+      return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    function renderVehicles(filtered = vehicles) {
+      tableElement.innerHTML = filtered.map(vehicle => {
+        const statusColor = vehicle.status === 'Active' ? 'bg-emerald-500/10 text-emerald-300' : vehicle.status === 'Pending' ? 'bg-amber-500/10 text-amber-300' : 'bg-sky-500/10 text-sky-300';
+        return `
+          <tr class="cursor-pointer transition hover:bg-slate-900" data-reg="${vehicle.reg}">
+            <td class="px-4 py-4 font-semibold text-white">${vehicle.reg}</td>
+            <td class="px-4 py-4 text-slate-300">${vehicle.make}</td>
+            <td class="px-4 py-4 text-slate-300">${vehicle.model}</td>
+            <td class="px-4 py-4"><span class="inline-flex rounded-full px-3 py-1 text-sm font-semibold ${statusColor}">${vehicle.status}</span></td>
+            <td class="px-4 py-4 text-slate-300">${formatCurrency(vehicle.total)}</td>
+            <td class="px-4 py-4 text-slate-300">${vehicle.membership}</td>
+          </tr>`;
+      }).join('');
+      document.querySelectorAll('#vehicleTable tr').forEach(row => {
+        row.addEventListener('click', () => {
+          const reg = row.dataset.reg;
+          openVehicleProfile(reg);
+        });
+      });
+    }
+
+    function openVehicleProfile(reg) {
+      const vehicle = vehicles.find(v => v.reg === reg);
+      if (!vehicle) return;
+      modalTitle.textContent = `${vehicle.reg} - ${vehicle.make} ${vehicle.model}`;
+      profileReg.textContent = vehicle.reg;
+      profileTotal.textContent = formatCurrency(vehicle.total);
+      profileStatus.textContent = vehicle.status;
+      profileDriver.textContent = vehicle.driver;
+      damageHistory.innerHTML = vehicle.damage.map(item => `<li class="rounded-2xl border border-slate-800 bg-slate-950/80 p-3 text-slate-200">${item}</li>`).join('') || '<li class="text-slate-500">No damage history.</li>';
+      serviceHistory.innerHTML = vehicle.service.map(item => `<li class="rounded-2xl border border-slate-800 bg-slate-950/80 p-3 text-slate-200">${item}</li>`).join('') || '<li class="text-slate-500">No service history.</li>';
+      documentList.innerHTML = vehicle.docs.map(item => `<div class="grid gap-2 rounded-3xl border border-slate-800 bg-slate-950/80 p-3 text-slate-200 sm:grid-cols-[1fr_auto] sm:items-center"><p>${item}</p><span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-400">Stored</span></div>`).join('') || '<p class="text-slate-500">No uploaded documents.</p>';
+      tyreHistory.innerHTML = vehicle.tyres.map(item => `<li class="rounded-2xl border border-slate-800 bg-slate-950/80 p-3 text-slate-200">${item}</li>`).join('') || '<li class="text-slate-500">No tyre replacements recorded.</li>';
+      modal.classList.remove('hidden');
+    }
+
+    function applyFilters() {
+      const regValue = filterReg.value.trim().toLowerCase();
+      const typeValue = filterType.value;
+      const dateValue = filterDate.value;
+      const statusValue = filterStatus.value;
+      const filteredClaims = claims.filter(claim => {
+        const searchReg = regValue ? claim.reg.toLowerCase().includes(regValue) : true;
+        const typeMatch = typeValue ? claim.type === typeValue : true;
+        const statusMatch = statusValue ? claim.status === statusValue : true;
+        const dateMatch = dateValue ? claim.date.startsWith(dateValue) : true;
+        return searchReg && typeMatch && statusMatch && dateMatch;
+      });
+      renderFilteredClaims(filteredClaims);
+    }
+
+    function renderFilteredClaims(data) {
+      const claimsTable = document.getElementById('claimsTable');
+      claimsTable.innerHTML = data.length
+        ? data.map(claim => `
+            <tr class="transition hover:bg-slate-900">
+              <td class="px-4 py-4 font-semibold text-white">${claim.reg}</td>
+              <td class="px-4 py-4 text-slate-300">${claim.type}</td>
+              <td class="px-4 py-4 text-slate-300">${new Date(claim.date).toLocaleDateString('en-GB')}</td>
+              <td class="px-4 py-4 text-slate-300">${formatCurrency(claim.amount)}</td>
+              <td class="px-4 py-4 text-slate-300">${claim.status}</td>
+              <td class="px-4 py-4 text-slate-300">${claim.submittedBy}</td>
+            </tr>`
+          ).join('')
+        : `<tr><td class="px-4 py-6 text-slate-500" colspan="6">No matching claims found.</td></tr>`;
+    }
+
+    filterReg.addEventListener('input', applyFilters);
+    filterType.addEventListener('change', applyFilters);
+    filterDate.addEventListener('change', applyFilters);
+    filterStatus.addEventListener('change', applyFilters);
+
+    newClaimBtn.addEventListener('click', () => {
+      claimModal.classList.remove('hidden');
+    });
+    closeModal.addEventListener('click', () => modal.classList.add('hidden'));
+    closeClaim.addEventListener('click', () => claimModal.classList.add('hidden'));
+    modal.addEventListener('click', (event) => { if (event.target === modal) modal.classList.add('hidden'); });
+    claimModal.addEventListener('click', (event) => { if (event.target === claimModal) claimModal.classList.add('hidden'); });
+
+    function populateVehicleSelect() {
+      claimVehicle.innerHTML = vehicles.map(vehicle => `<option value="${vehicle.reg}">${vehicle.reg} — ${vehicle.make} ${vehicle.model}</option>`).join('');
+      if (vehicles.length) claimVehicle.value = vehicles[0].reg;
+    }
+
+    claimForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const newClaim = {
+        reg: claimVehicle.value,
+        type: document.getElementById('claimType').value,
+        date: document.getElementById('claimDate').value,
+        status: document.getElementById('claimStatus').value,
+        amount: parseFloat(document.getElementById('claimAmount').value),
+        submittedBy: document.getElementById('claimSubmittedBy').value,
+      };
+      claims.unshift(newClaim);
+      claimForm.reset();
+      claimModal.classList.add('hidden');
+      alert('New claim submitted and ready for admin review.');
+    });
+
+    renderVehicles();
+    populateVehicleSelect();
+    renderFilteredClaims(claims);
+  </script>
+</body>
+</html>
