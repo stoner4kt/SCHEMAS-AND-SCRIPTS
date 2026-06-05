@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict QT2uwAjX062Hv2fBkQu0GfzvT1otHtXqqotG21YUPD2OhZcxhnEhQwPb4YpBOHl
+\restrict iBbzb0pMrVSrUzSjyRvxldQKAR7f5FduCHT59Izys1KTSzY4g5HMnwa4ZWoT4pQ
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 18.2
@@ -1644,6 +1644,24 @@ ALTER TABLE ONLY public.vehicles
 
 
 --
+-- Name: bookings Admins can create bookings; Type: POLICY; Schema: public; Owner: postgres
+--
+
+CREATE POLICY "Admins can create bookings" ON public.bookings FOR INSERT WITH CHECK (((auth.role() = 'authenticated'::text) AND (( SELECT profiles.role
+   FROM public.profiles
+  WHERE (profiles.id = auth.uid())) = 'admin'::text)));
+
+
+--
+-- Name: bookings Admins can update bookings; Type: POLICY; Schema: public; Owner: postgres
+--
+
+CREATE POLICY "Admins can update bookings" ON public.bookings FOR UPDATE WITH CHECK (((auth.role() = 'authenticated'::text) AND (( SELECT profiles.role
+   FROM public.profiles
+  WHERE (profiles.id = auth.uid())) = 'admin'::text)));
+
+
+--
 -- Name: booking_edit_log; Type: ROW SECURITY; Schema: public; Owner: postgres
 --
 
@@ -2344,5 +2362,5 @@ ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin IN SCHEMA public GRANT ALL ON T
 -- PostgreSQL database dump complete
 --
 
-\unrestrict QT2uwAjX062Hv2fBkQu0GfzvT1otHtXqqotG21YUPD2OhZcxhnEhQwPb4YpBOHl
+\unrestrict iBbzb0pMrVSrUzSjyRvxldQKAR7f5FduCHT59Izys1KTSzY4g5HMnwa4ZWoT4pQ
 
